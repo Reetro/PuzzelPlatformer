@@ -12,6 +12,17 @@ AMovingPlatform::AMovingPlatform()
   MovementSpeed = 5.0f;
 }
 
+void AMovingPlatform::BeginPlay()
+{
+  Super::BeginPlay();
+
+  if (HasAuthority())
+  {
+    SetReplicates(true);
+    SetReplicateMovement(true);
+  }
+}
+
 void AMovingPlatform::Tick(float DeltaSeconds)
 {
   Super::Tick(DeltaSeconds);

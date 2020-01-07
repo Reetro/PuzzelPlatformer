@@ -18,6 +18,8 @@ public:
 
   AMovingPlatform();
 
+  virtual void BeginPlay() override;
+
   UPROPERTY(EditAnywhere)
   float MovementSpeed;
 
