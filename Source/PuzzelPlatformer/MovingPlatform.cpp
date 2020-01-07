@@ -30,7 +30,10 @@ void AMovingPlatform::Tick(float DeltaSeconds)
   if (HasAuthority())
   {
     FVector Location = GetActorLocation();
-    Location += FVector(MovementSpeed * DeltaSeconds, 0, 0);
+    FVector GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
+    FVector Direction = (GlobalTargetLocation - Location).GetSafeNormal();
+
+    Location += MovementSpeed * DeltaSeconds * Direction;
 
     SetActorLocation(Location);
   }
