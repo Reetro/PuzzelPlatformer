@@ -26,6 +26,9 @@ public:
   UPROPERTY(EditAnywhere, meta = (MakeEditWidget = true))
   FVector TargetLocation;
 
+  void AddActiveTrigger();
+  void RemoveActiveTrigger();
+
 protected:
 
   virtual void Tick(float DeltaSeconds) override;
@@ -35,4 +38,7 @@ private:
   FVector GlobalTargetLocation;
 
   FVector GlobalStartLocation;
+
+  UPROPERTY(EditAnywhere, Category = "Platform Settings")
+  int32 ActiveTriggers = 1;
 };
