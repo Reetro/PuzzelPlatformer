@@ -4,10 +4,20 @@
 #include "PuzzelPlatformerInstance.h"
 #include "Engine/Engine.h"
 #include "GameFramework/PlayerController.h"
+#include "UObject/ConstructorHelpers.h"
+#include "Blueprint/UserWidget.h"
 
-void UPuzzelPlatformerInstance::init()
+UPuzzelPlatformerInstance::UPuzzelPlatformerInstance()
 {
+  ConstructorHelpers::FClassFinder<UUserWidget> MainMenuBPClass(TEXT("/Game/MenuSystem/MainMenu_WBP")); // String needed to find blueprint Game = Content folder
+  if (!ensure(MainMenuBPClass.Class != nullptr)) { return; }
 
+  MainMenuBP = MainMenuBPClass.Class;
+}
+
+void UPuzzelPlatformerInstance::Init()
+{
+  UE_LOG(LogTemp, Warning, TEXT("Found Widget : %s"), *MainMenuBP->GetName())
 }
 
 void UPuzzelPlatformerInstance::Host()

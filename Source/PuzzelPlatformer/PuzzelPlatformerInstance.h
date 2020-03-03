@@ -6,6 +6,8 @@
 #include "Engine/GameInstance.h"
 #include "PuzzelPlatformerInstance.generated.h"
 
+class UUserWidget;
+
 /**
  * 
  */
@@ -16,11 +18,18 @@ class PUZZELPLATFORMER_API UPuzzelPlatformerInstance : public UGameInstance
 
 public:
 
-  virtual void init();
+  UPuzzelPlatformerInstance();
+
+  virtual void Init() override;
 
   UFUNCTION(exec)
   void Host();
 
   UFUNCTION(exec)
   void Join(const FString& Address);
+
+private:
+
+  TSubclassOf<UUserWidget> MainMenuBP;
+
 };
