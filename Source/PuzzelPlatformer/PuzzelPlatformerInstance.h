@@ -28,8 +28,11 @@ public:
   UFUNCTION(exec)
   void Join(const FString& Address);
 
+  UFUNCTION(exec, BlueprintCallable)
+  void LoadGameMenu();
+
 private:
 
-  TSubclassOf<UUserWidget> MainMenuBP;
+  TSubclassOf<UUserWidget> MenuClass;
 
 };

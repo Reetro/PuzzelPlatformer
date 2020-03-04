@@ -12,12 +12,12 @@ UPuzzelPlatformerInstance::UPuzzelPlatformerInstance()
   ConstructorHelpers::FClassFinder<UUserWidget> MainMenuBPClass(TEXT("/Game/MenuSystem/MainMenu_WBP")); // String needed to find blueprint Game = Content folder
   if (!ensure(MainMenuBPClass.Class != nullptr)) { return; }
 
-  MainMenuBP = MainMenuBPClass.Class;
+  MenuClass = MainMenuBPClass.Class;
 }
 
 void UPuzzelPlatformerInstance::Init()
 {
-  UE_LOG(LogTemp, Warning, TEXT("Found Widget : %s"), *MainMenuBP->GetName())
+  
 }
 
 void UPuzzelPlatformerInstance::Host()
@@ -44,4 +44,14 @@ void UPuzzelPlatformerInstance::Join(const FString& Address)
   if (!ensure(PlayerController != nullptr)) { return; }
 
   PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+}
+
+void UPuzzelPlatformerInstance::LoadGameMenu()
+{
+  if (!ensure(MenuClass != nullptr)) return;
+
+  UUserWidget* Menu = CreateWidget<UUserWidget>(this, MenuClass);
+  if (!ensure(Menu != nullptr)) return;
+
+  Menu->AddToViewport();
 }
