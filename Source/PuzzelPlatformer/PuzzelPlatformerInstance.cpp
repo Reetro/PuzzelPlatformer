@@ -6,6 +6,7 @@
 #include "Components/Widget.h"
 #include "GameFramework/PlayerController.h"
 #include "UObject/ConstructorHelpers.h"
+#include "MenuSystem/MainMenu.h"
 #include "Blueprint/UserWidget.h"
 
 UPuzzelPlatformerInstance::UPuzzelPlatformerInstance()
@@ -51,7 +52,7 @@ void UPuzzelPlatformerInstance::LoadGameMenu()
 {
   if (!ensure(MenuClass != nullptr)) return;
 
-  UUserWidget* Menu = CreateWidget<UUserWidget>(this, MenuClass); // Creates the actual menu
+  UMainMenu* Menu = CreateWidget<UMainMenu>(this, MenuClass); // Creates the actual menu
   if (!ensure(Menu != nullptr)) return;
 
   Menu->bIsFocusable = true;
@@ -70,4 +71,6 @@ void UPuzzelPlatformerInstance::LoadGameMenu()
 
   // Show mouse
   PlayerController->bShowMouseCursor = true;
+
+  Menu->SetMenuInterface(this);
 }

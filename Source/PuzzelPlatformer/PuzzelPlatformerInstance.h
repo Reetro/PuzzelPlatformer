@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
+#include "MenuSystem/MenuInterface.h"
 #include "PuzzelPlatformerInstance.generated.h"
 
 class UUserWidget;
@@ -12,7 +13,7 @@ class UUserWidget;
  * 
  */
 UCLASS()
-class PUZZELPLATFORMER_API UPuzzelPlatformerInstance : public UGameInstance
+class PUZZELPLATFORMER_API UPuzzelPlatformerInstance : public UGameInstance, public IMenuInterface
 {
 	GENERATED_BODY()
 

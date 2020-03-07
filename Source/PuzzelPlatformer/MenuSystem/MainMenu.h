@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "MenuInterface.h"
 #include "MainMenu.generated.h"
 
 class UButton;
@@ -16,6 +17,10 @@ class PUZZELPLATFORMER_API UMainMenu : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
+
+  void SetMenuInterface(IMenuInterface* Interface);
+
 protected:
 
   virtual bool Initialize() override;
@@ -27,6 +32,8 @@ private:
 	
   UPROPERTY(meta = (BindWidget))
   UButton* Join;
+
+  IMenuInterface* MenuInterface;
 
   UFUNCTION()
   void HostServer();
