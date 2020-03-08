@@ -8,6 +8,7 @@
 #include "PuzzelPlatformerInstance.generated.h"
 
 class UUserWidget;
+class UMainMenu;
 
 /**
  * 
@@ -36,4 +37,5 @@ private:
 
   TSubclassOf<UUserWidget> MenuClass;
 
+  UMainMenu* Menu;
 };

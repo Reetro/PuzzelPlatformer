@@ -24,6 +24,11 @@ void UPuzzelPlatformerInstance::Init()
 
 void UPuzzelPlatformerInstance::Host()
 {
+  if (Menu)
+  {
+    Menu->TearDown();
+  }
+
   UEngine* Engine = GetEngine();
   if (!ensure(Engine != nullptr)) { return; }
 
@@ -42,7 +47,7 @@ void UPuzzelPlatformerInstance::Join(const FString& Address)
 
   Engine->AddOnScreenDebugMessage(0, 5, FColor::Green, FString::Printf(TEXT("Joining: %s"), *Address));
 
-  APlayerController* PlayerController = GetFirstLocalPlayerController();
+  APlayerController* PlayerController = GetFirstLocalPlayerController(); 
   if (!ensure(PlayerController != nullptr)) { return; }
 
   PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
@@ -52,25 +57,10 @@ void UPuzzelPlatformerInstance::LoadGameMenu()
 {
   if (!ensure(MenuClass != nullptr)) return;
 
-  UMainMenu* Menu = CreateWidget<UMainMenu>(this, MenuClass); // Creates the actual menu
+  Menu = CreateWidget<UMainMenu>(this, MenuClass); // Creates the actual menu
   if (!ensure(Menu != nullptr)) return;
 
-  Menu->bIsFocusable = true;
-
-  Menu->AddToViewport(); // Displays the menu on screen
-
-  // Get Player controller
-  APlayerController* PlayerController = GetFirstLocalPlayerController();
-  if (!ensure(PlayerController != nullptr)) return;
-
-  // Construct Mouse Data
-  FInputModeUIOnly InputData;
-  InputData.SetWidgetToFocus(Menu->TakeWidget());
-  InputData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-  PlayerController->SetInputMode(InputData);
-
-  // Show mouse
-  PlayerController->bShowMouseCursor = true;
+  Menu->Setup();
 
   Menu->SetMenuInterface(this);
 }

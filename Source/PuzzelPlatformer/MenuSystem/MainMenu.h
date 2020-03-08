@@ -21,6 +21,10 @@ public:
 
   void SetMenuInterface(IMenuInterface* Interface);
 
+  void Setup();
+
+  void TearDown();
+
 protected:
 
   virtual bool Initialize() override;
@@ -37,4 +41,6 @@ private:
 
   UFUNCTION()
   void HostServer();
+
+  APlayerController* PlayerController;
 };
