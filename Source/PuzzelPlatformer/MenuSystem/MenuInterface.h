@@ -25,4 +25,5 @@ public:
 
   virtual void Host() = 0; // = 0 makes this function a pure virtual function meaning it does not need a default implementation
 
+  virtual void Join(const FString& Address) = 0;
 };
