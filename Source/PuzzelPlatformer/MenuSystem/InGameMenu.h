@@ -25,5 +25,9 @@ private:
   UButton* QuitButton;
 
   UFUNCTION()
-  void GoBackToMainMenu();
+  void LeaveServer();
+
+protected:
+
+  virtual bool Initialize() override;
 };

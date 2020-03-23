@@ -9,6 +9,7 @@
 
 class UUserWidget;
 class UMainMenu;
+class UMenuWidget;
 
 /**
  * 
@@ -28,6 +29,9 @@ public:
   UFUNCTION(exec)
   void Join(const FString& Address);
 
+  UFUNCTION(exec)
+  void LeaveGame();
+
   UFUNCTION(exec, BlueprintCallable)
   void LoadGameMenu();
 
@@ -41,4 +45,6 @@ private:
   TSubclassOf<UUserWidget> InGameMenuClass;
 
   UMainMenu* Menu;
+
+  UMenuWidget* InGameMenu;
 };

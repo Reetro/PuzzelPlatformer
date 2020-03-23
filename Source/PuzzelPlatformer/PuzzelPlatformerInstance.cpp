@@ -59,6 +59,20 @@ void UPuzzelPlatformerInstance::Join(const FString& Address)
   PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
 }
 
+void UPuzzelPlatformerInstance::LeaveGame()
+{
+  if (InGameMenu)
+  {
+    InGameMenu->TearDown();
+  }
+
+  APlayerController* PlayerController = GetFirstLocalPlayerController();
+  if (!ensure(PlayerController != nullptr)) { return; }
+
+  const FString MainMenu = FString("/Game/MenuSystem/MainMenu");
+  PlayerController->ClientTravel(MainMenu, ETravelType::TRAVEL_Absolute);
+}
+
 void UPuzzelPlatformerInstance::LoadGameMenu()
 {
   if (!ensure(MenuClass != nullptr)) return;
@@ -75,10 +89,10 @@ void UPuzzelPlatformerInstance::LoadInGameMenu()
 {
   if (!ensure(InGameMenuClass != nullptr)) return;
 
-  UMenuWidget* InGameMenu = CreateWidget<UMenuWidget>(this, InGameMenuClass); // Creates the actual menu
+  InGameMenu = CreateWidget<UMenuWidget>(this, InGameMenuClass); // Creates the actual menu
   if (!ensure(InGameMenu != nullptr)) return;
 
   InGameMenu->Setup();
 
-  InGameMenu->SetMenuInterface(this);
+  InGameMenu->SetMenuInterface(this); 
 }

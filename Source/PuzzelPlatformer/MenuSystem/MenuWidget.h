@@ -21,6 +21,7 @@ public:
 
   void Setup();
 
+  UFUNCTION()
   void TearDown();
 
 protected:
