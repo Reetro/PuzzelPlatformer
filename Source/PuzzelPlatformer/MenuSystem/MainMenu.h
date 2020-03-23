@@ -3,8 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
-#include "MenuInterface.h"
+#include "MenuWidget.h"
 #include "MainMenu.generated.h"
 
 class UButton;
@@ -16,17 +15,9 @@ class UEditableTextBox;
  * 
  */
 UCLASS()
-class PUZZELPLATFORMER_API UMainMenu : public UUserWidget
+class PUZZELPLATFORMER_API UMainMenu : public UMenuWidget
 {
 	GENERATED_BODY()
-
-public:
-
-  void SetMenuInterface(IMenuInterface* Interface);
-
-  void Setup();
-
-  void TearDown();
 
 protected:
 
@@ -58,8 +49,6 @@ private:
   UPROPERTY(meta = (BindWidget))
   UEditableTextBox* IPBox;
 
-  IMenuInterface* MenuInterface;
-
   UFUNCTION()
   void HostServer();
 
@@ -71,6 +60,4 @@ private:
 
   UFUNCTION()
   void GoBackToMainMenu();
-
-  APlayerController* PlayerController;
 };

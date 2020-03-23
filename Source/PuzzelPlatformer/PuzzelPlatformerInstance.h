@@ -22,8 +22,6 @@ public:
 
   UPuzzelPlatformerInstance();
 
-  virtual void Init() override;
-
   UFUNCTION(exec)
   void Host();
 
@@ -33,9 +31,14 @@ public:
   UFUNCTION(exec, BlueprintCallable)
   void LoadGameMenu();
 
+  UFUNCTION(exec, BlueprintCallable)
+  void LoadInGameMenu();
+
 private:
 
   TSubclassOf<UUserWidget> MenuClass;
+
+  TSubclassOf<UUserWidget> InGameMenuClass;
 
   UMainMenu* Menu;
 };

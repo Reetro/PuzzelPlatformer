@@ -7,6 +7,7 @@
 #include "GameFramework/PlayerController.h"
 #include "UObject/ConstructorHelpers.h"
 #include "MenuSystem/MainMenu.h"
+#include "MenuSystem/MenuWidget.h"
 #include "Blueprint/UserWidget.h"
 
 UPuzzelPlatformerInstance::UPuzzelPlatformerInstance()
@@ -15,13 +16,13 @@ UPuzzelPlatformerInstance::UPuzzelPlatformerInstance()
   if (!ensure(MainMenuBPClass.Class != nullptr)) { return; }
 
   MenuClass = MainMenuBPClass.Class;
-}
 
-void UPuzzelPlatformerInstance::Init()
-{
+  ConstructorHelpers::FClassFinder<UUserWidget> InGameMenuBPClass(TEXT("/Game/MenuSystem/InGameMenu_WBP")); // String needed to find blueprint Game = Content folder
+  if (!ensure(InGameMenuBPClass.Class != nullptr)) { return; }
+
+  InGameMenuClass = InGameMenuBPClass.Class;
+}
   
-}
-
 void UPuzzelPlatformerInstance::Host()
 {
   if (Menu)
@@ -68,4 +69,16 @@ void UPuzzelPlatformerInstance::LoadGameMenu()
   Menu->Setup();
 
   Menu->SetMenuInterface(this);
+}
+
+void UPuzzelPlatformerInstance::LoadInGameMenu()
+{
+  if (!ensure(InGameMenuClass != nullptr)) return;
+
+  UMenuWidget* InGameMenu = CreateWidget<UMenuWidget>(this, InGameMenuClass); // Creates the actual menu
+  if (!ensure(InGameMenu != nullptr)) return;
+
+  InGameMenu->Setup();
+
+  InGameMenu->SetMenuInterface(this);
 }
