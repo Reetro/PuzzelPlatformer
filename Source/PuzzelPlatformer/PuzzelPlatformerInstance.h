@@ -24,13 +24,13 @@ public:
   UPuzzelPlatformerInstance();
 
   UFUNCTION(exec)
-  void Host();
+  virtual void Host() override;
 
   UFUNCTION(exec)
-  void Join(const FString& Address);
+  virtual void Join(const FString& Address) override;
 
   UFUNCTION(exec)
-  void LeaveGame();
+  virtual void LeaveGame() override;
 
   UFUNCTION(exec, BlueprintCallable)
   void LoadGameMenu();
